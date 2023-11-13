@@ -6,6 +6,7 @@ import OurMenu from "../../../../Final Project Part-1/bistro-restaurant/src/Page
 import OurShop from "../../../../Final Project Part-1/bistro-restaurant/src/Pages/OurShop/OurShop";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
+import Order from "../Pages/Order/Order/Order";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +26,9 @@ export const router = createBrowserRouter([
             }, {
                 path: '/ourshop',
                 element: <OurShop></OurShop>
+            }, {
+                path: '/order',
+                element: <Order></Order>
             }
         ]
     },

@@ -36,7 +36,7 @@ const Category = () => {
                 <SwiperSlide><img src={img4} alt="" /> <h3 className='text-4xl text-center text-white -mt-20'>Cakes</h3></SwiperSlide>
                 <SwiperSlide><img src={img5} alt="" /> <h3 className='text-4xl text-center text-white -mt-20'>Salads</h3></SwiperSlide>
             </Swiper>
-        </section >
+        </section>
     );
 };
 

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 
 const useMenu = () => {
     const [menu, setMenu] = useState([])
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         fetch('menu.json')
             .then(res => res.json())
             .then(data => {
                 setMenu(data)
+                setLoading(false)
             })
     }, [])
-    return [menu]   ///if some one call the menu, get it 
+    return [menu, loading]   ///if some one call the menu, get it 
 }
 export default useMenu;
