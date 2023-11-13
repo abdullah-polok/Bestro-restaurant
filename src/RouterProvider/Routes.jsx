@@ -7,6 +7,7 @@ import OurShop from "../../../../Final Project Part-1/bistro-restaurant/src/Page
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import Order from "../Pages/Order/Order/Order";
+import Menu from "../Pages/OurMenu/Menu";
 
 export const router = createBrowserRouter([
     {
@@ -22,12 +23,12 @@ export const router = createBrowserRouter([
                 element: <ContactUs></ContactUs>
             }, {
                 path: '/ourmenu',
-                element: <OurMenu></OurMenu>
+                element: <Menu></Menu>
             }, {
                 path: '/ourshop',
                 element: <OurShop></OurShop>
             }, {
-                path: '/order',
+                path: '/order/:category',
                 element: <Order></Order>
             }
         ]
