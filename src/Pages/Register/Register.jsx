@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 // import { useForm, SubmitHandler } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
-
+import { Link } from 'react-router-dom'
 const Register = () => {
 
     const { createuser } = useContext(AuthContext)
@@ -36,8 +36,6 @@ const Register = () => {
                                 <span className="label-text">Name</span>
                             </label>
                             <input type="text" name="name" placeholder="name" className="input input-bordered" required />
-
-
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -55,6 +53,8 @@ const Register = () => {
                             <input className="btn btn-primary" type="submit" value="Register"></input>
                         </div>
                     </form>
+                    <p className='p-8'>Already Have a account? <Link className='text-blue-500' to='/login'>login</Link></p>
+
                 </div>
             </div>
         </div>
