@@ -6,7 +6,6 @@ import Swal from 'sweetalert2'
 
 const Login = () => {
     const { loginUser } = useContext(AuthContext)
-    const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
     ////use simple re captha in login page
 
