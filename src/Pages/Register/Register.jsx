@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+// import { useForm, SubmitHandler } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext)
-
-
+    const { createuser } = useContext(AuthContext)
+    // const { register, handleSubmit, watch, formState: { errors } } = useForm()
+    // const onSubmit = (data) => console.log(data)
 
     const handleRegister = e => {
         e.preventDefault()
@@ -14,12 +15,12 @@ const Register = () => {
         const password = form.password.value;
         console.log(email, password)
 
-        createUser(email, password)
+        createuser(email, password)
             .then(result => {
                 const user = result.user
                 console.log(user)
             })
-            .then(err => console.log(err.message))
+            .catch(err => console.log(err.message))
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -35,6 +36,8 @@ const Register = () => {
                                 <span className="label-text">Name</span>
                             </label>
                             <input type="text" name="name" placeholder="name" className="input input-bordered" required />
+
+
                         </div>
                         <div className="form-control">
                             <label className="label">
