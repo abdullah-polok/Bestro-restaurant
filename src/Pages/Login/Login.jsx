@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link } from 'react-router-dom'
@@ -84,8 +84,7 @@ const Login = () => {
                             <label className="label">
                                 <LoadCanvasTemplate />
                             </label>
-                            <input type="text" onClick={handleValidateCaptcha} name="captcha" placeholder="type the above text" className="input input-bordered" required />
-                            <button className="btn btn-outline btn-xs mt-2">Validate</button>
+                            <input type="text" onBlur={handleValidateCaptcha} name="captcha" placeholder="type the above text" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
                             <input disabled={disabled} className="btn btn-primary" type="submit" value="Login"></input>
