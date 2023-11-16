@@ -1,14 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 const Login = () => {
     const { loginUser } = useContext(AuthContext)
     const [disabled, setDisabled] = useState(true)
-    ////use simple re captha in login page
 
+    ///redirect after login 
+    const navigate = useNavigate();
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/'
+
+
+    ////use simple re captha in login page
     useEffect(() => {
         loadCaptchaEnginge(6)  ///capcha of 6 charecter
     }, [])
@@ -43,6 +50,7 @@ const Login = () => {
                       `
                     }
                 });
+                navigate(from, { replace: true });
             })
             .then(data => console.log(data))
     }
