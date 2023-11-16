@@ -1,24 +1,45 @@
 import { useContext } from 'react';
 // import { useForm, SubmitHandler } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 const Register = () => {
-
-    const { createuser } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const { createuse, updateUserProfile } = useContext(AuthContext)
     // const { register, handleSubmit, watch, formState: { errors } } = useForm()
     // const onSubmit = (data) => console.log(data)
 
     const handleRegister = e => {
         e.preventDefault()
         const form = e.target;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        const photourl = form.photourl.value;
+        console.log(email, password, photourl)
 
         createuser(email, password)
             .then(result => {
                 const user = result.user
                 console.log(user)
+                updateUserProfile(name, photourl)
+                    .then(() => {
+                        console.log("User profile info updated")
+                        reset();
+                        Swal.fire({
+                            position: "top-middle",
+                            icon: "success",
+                            title: "User register successfully",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        navigate('/')
+
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
             })
             .catch(err => console.log(err.message))
     }
@@ -48,6 +69,12 @@ const Register = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo url</span>
+                            </label>
+                            <input type="text" name="photourl" placeholder="photo url" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="Register"></input>
