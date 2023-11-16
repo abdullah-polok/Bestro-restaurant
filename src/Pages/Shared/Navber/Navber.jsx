@@ -15,6 +15,7 @@ const Navber = () => {
         <li><Link to='/ourmenu'>Our Menu</Link></li>
         <li><Link to='/ourshop'>Our Shop</Link></li>
         <li><Link to='/order/salad'>Order Food</Link></li>
+        <li><Link to='/secret'>Secret</Link></li>
 
         {
             user ?
