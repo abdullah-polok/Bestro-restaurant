@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 const Register = () => {
     const navigate = useNavigate()
-    const { createuse, updateUserProfile } = useContext(AuthContext)
+    const { createuser, updateUserProfile } = useContext(AuthContext)
     // const { register, handleSubmit, watch, formState: { errors } } = useForm()
     // const onSubmit = (data) => console.log(data)
 

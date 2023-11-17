@@ -1,24 +1,76 @@
 import useAuth from "../../Hooks/useAuth";
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useCart from "../../Hooks/useCart";
 const FoodCard = ({ item }) => {
     ///custom hook
-    const { user } = useAuth
-
-    const { category, image, name, price, recipe } = item
-
+    const { user } = useAuth()
+    // console.log(user)
+    const { category, image, name, price, recipe, _id } = item
     const navigate = useNavigate()
+    const location = useLocation()
+
+    ///used axiossecure for hide the the base link
+    const axiosSecure = useAxiosSecure();
+    const [, refetch] = useCart();
+
     const handleAddToCart = food => {
         ///Enforce user to login before add to the cart
         ///check user login or not and if login cart can be added
         if (user && user.email) {
-            fetch(`http://localhost:5000/cart`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(food)
-            })
+            const cartItem = {
+                menuId: _id,
+                email: user.email,
+                name,
+                image,
+                price
+            }
+            ///send data to the database useing axios
+            // axios.post('http://localhost:5000/carts', cartItem)
+            //     .then(res => {
+            //         console.log(res.data)
+            //         if (res.data.insertedId) {
+            //             Swal.fire({
+            //                 position: "top-end",
+            //                 icon: "success",
+            //                 title: `${name} added to your cart`,
+            //                 showConfirmButton: false,
+            //                 timer: 1500
+            //             });
+            //         }
+            //     })
+
+
+
+
+
+            ///send data to the database useing axiosSecure
+            axiosSecure.post('/carts', cartItem)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `${name} added to your cart`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // refetch the cart
+                        refetch();
+                    }
+                })
+
+            // fetch(`http://localhost:5000/cart`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(food)
+            // })
         }
         else {
             Swal.fire({
@@ -32,7 +84,7 @@ const FoodCard = ({ item }) => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     ///send the user to the login page
-                    navigate('/login')
+                    navigate('/login', { state: { from: location } })
                 }
             });
         }
@@ -45,7 +97,7 @@ const FoodCard = ({ item }) => {
                 <h2 className="card-title">{name}</h2>
                 <p>{recipe}</p>
                 <div className="card-actions justify-center">
-                    <button onClick={() => handleAddToCart(item)} className='btn btn-outline border-orange-400 border-0 border-b-4'>Add to cart</button>
+                    <button onClick={handleAddToCart} className='btn btn-outline border-orange-400 border-0 border-b-4'>Add to cart</button>
                 </div>
             </div>
         </div>

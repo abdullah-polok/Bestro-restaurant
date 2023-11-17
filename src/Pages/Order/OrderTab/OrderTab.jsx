@@ -1,7 +1,7 @@
 import FoodCard from "../../../Components/FoodCard/FoodCard";
 
 const OrderTab = ({ menu }) => {
-    console.log(menu)
+    // console.log(menu)
     return (
         <div className='grid grid-cols-3 gap-5'>
             {

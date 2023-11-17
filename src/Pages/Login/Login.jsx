@@ -11,7 +11,7 @@ const Login = () => {
     ///redirect after login 
     const navigate = useNavigate();
     const location = useLocation()
-
+    console.log(location)
     const from = location.state?.from?.pathname || '/'
 
 
