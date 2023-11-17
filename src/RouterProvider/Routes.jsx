@@ -4,7 +4,9 @@ import {
 import ContactUs from "../../../../Final Project Part-1/bistro-restaurant/src/Pages/ContactUs/ContactUs";
 import OurMenu from "../../../../Final Project Part-1/bistro-restaurant/src/Pages/OurMenu/OurMenu";
 import OurShop from "../../../../Final Project Part-1/bistro-restaurant/src/Pages/OurShop/OurShop";
+import Dashboard from "../Layout/Dashboard";
 import Main from "../Layout/Main";
+import Cart from "../Pages/Dashboard/Cart/Cart";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Order from "../Pages/Order/Order/Order";
@@ -48,6 +50,17 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: 'dashborad',
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: 'cart',
+                element: <Cart></Cart>
+            }
+        ]
+
+    }
 
 ]);
 
