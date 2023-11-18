@@ -3,11 +3,15 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 const Register = () => {
+
+    ///for open user without login any one can see this
+    const axiosPublic = useAxiosPublic()
+
     const navigate = useNavigate()
     const { createuser, updateUserProfile } = useContext(AuthContext)
-    // const { register, handleSubmit, watch, formState: { errors } } = useForm()
-    // const onSubmit = (data) => console.log(data)
+
 
     const handleRegister = e => {
         e.preventDefault()
@@ -25,16 +29,29 @@ const Register = () => {
                 updateUserProfile(name, photourl)
                     .then(() => {
                         console.log("User profile info updated")
-                        reset();
-                        Swal.fire({
-                            position: "top-middle",
-                            icon: "success",
-                            title: "User register successfully",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
 
-                        navigate('/')
+                        ///create user entry in thr database
+                        ///using axiosPublic
+                        const userInfo = {
+                            name: name,
+                            email: email
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log("User added to the database")
+                                    reset();
+                                    Swal.fire({
+                                        position: "top-middle",
+                                        icon: "success",
+                                        title: "User register successfully",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+
+                                    navigate('/')
+                                }
+                            })
 
                     })
                     .catch(error => {
