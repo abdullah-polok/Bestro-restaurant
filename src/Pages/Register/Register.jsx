@@ -4,6 +4,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 const Register = () => {
 
     ///for open user without login any one can see this
@@ -98,7 +99,7 @@ const Register = () => {
                         </div>
                     </form>
                     <p className='p-8'>Already Have a account? <Link className='text-blue-500' to='/login'>login</Link></p>
-
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
