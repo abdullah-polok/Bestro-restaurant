@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaTrash, FaUser, FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
 
     ////load all users on the dashoboard page using tan stack query
     const axiosSecure = useAxiosSecure()
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -16,7 +17,30 @@ const AllUsers = () => {
     })
 
     const handleDeleteUser = user => {
-        console.log(user)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/users/${user._id}`)
+                    .then(res => {
+                        console.log(res)
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
 
     }
     return (
