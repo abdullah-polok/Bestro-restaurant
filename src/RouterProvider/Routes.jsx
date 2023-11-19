@@ -6,6 +6,7 @@ import OurMenu from "../../../../Final Project Part-1/bistro-restaurant/src/Page
 import OurShop from "../../../../Final Project Part-1/bistro-restaurant/src/Pages/OurShop/OurShop";
 import Dashboard from "../Layout/Dashboard";
 import Main from "../Layout/Main";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import Cart from "../Pages/Dashboard/Cart/Cart";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -57,6 +58,11 @@ export const router = createBrowserRouter([
             {
                 path: 'cart',
                 element: <Cart></Cart>
+            },
+            ////admin routes
+            {
+                path: 'users',
+                element: <AllUsers></AllUsers>
             }
         ]
 
