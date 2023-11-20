@@ -1,12 +1,14 @@
 import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaUsers, FaUtensils, FaVoicemail } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../Hooks/useAdmin";
 import useCart from "../Hooks/useCart";
 
 const Dashboard = () => {
     const [cart] = useCart()
 
     //TODO : get isadmin value from the database
-    const isAdmin = true
+    ///destructuring like array since send as a array
+    const [isAdmin] = useAdmin()
     return (
         <div className="flex">
             {/* make a drawer and dashboard sideber */}
